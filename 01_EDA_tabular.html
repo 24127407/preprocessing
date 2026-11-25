@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Chương 1: Khám phá Dữ liệu Bảng (Tabular EDA) &#8212; Đồ án Tiền xử lý Dữ liệu</title>
+    <title>Chương 1: Phân tích Thống kê Khám phá Dữ liệu Bảng (Tabular EDA) &#8212; Đồ án Tiền xử lý Dữ liệu</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '01_EDA_tabular';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chương 2: Tiền xử lý Dữ liệu Bảng &amp; Xử lý Mất cân bằng" href="02_preprocessing_tabular.html" />
+    <link rel="next" title="Chương 2: Pipeline Tiền xử lý Dữ liệu Bảng &amp; Xử lý Mất cân bằng [Nâng cao]" href="02_preprocessing_tabular.html" />
     <link rel="prev" title="Đồ án Tiền xử lý Dữ liệu (Data Preprocessing)" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -176,8 +176,8 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chương 1: Khám phá Dữ liệu Bảng (Tabular EDA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_preprocessing_tabular.html">Chương 2: Tiền xử lý Dữ liệu Bảng &amp; Xử lý Mất cân bằng</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chương 1: Phân tích Thống kê Khám phá Dữ liệu Bảng (Tabular EDA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_preprocessing_tabular.html">Chương 2: Pipeline Tiền xử lý Dữ liệu Bảng &amp; Xử lý Mất cân bằng <code class="docutils literal notranslate"><span class="pre">[Nâng</span> <span class="pre">cao]</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_text_preprocessing.html">Chương 3: Khám phá &amp; Tiền xử lý Dữ liệu Văn bản</a></li>
 <li class="toctree-l1"><a class="reference internal" href="report.html">Chương 4: Báo cáo Tổng hợp &amp; Phân tích So sánh</a></li>
 </ul>
@@ -333,7 +333,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chương 1: Khám phá Dữ liệu Bảng (Tabular EDA)</h1>
+    <h1>Chương 1: Phân tích Thống kê Khám phá Dữ liệu Bảng (Tabular EDA)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -343,7 +343,27 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muc-tieu-chuong">Mục tiêu chương</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muc-tieu-phan-tich">Mục tiêu phân tích</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tai-du-lieu-va-kham-pha-cau-truc-tong-quan">1. Tải dữ liệu và Khám phá Cấu trúc Tổng quan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nguon-du-lieu-va-co-che-tai-tu-dong">1.1. Nguồn dữ liệu và cơ chế tải tự động</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nhan-xet-so-bo-ve-cau-truc-du-lieu">1.2. Nhận xét sơ bộ về cấu trúc dữ liệu</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kiem-dinh-phan-phoi-chuan-normality-testing">2. Kiểm định Phân phối Chuẩn (Normality Testing)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-so-ly-thuyet-va-cong-thuc-toan-hoc">2.1. Cơ sở lý thuyết và công thức toán học</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-ket-qua-kiem-dinh-phan-phoi-nhan-xet-phe-binh">2.2. Phân tích kết quả kiểm định phân phối &amp; Nhận xét phê bình</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-tuong-quan-da-bien-multivariate-correlation-analysis">3. Phân tích Tương quan Đa biến (Multivariate Correlation Analysis)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. Cơ sở lý thuyết và công thức toán học</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-ket-qua-tuong-quan-da-bien-de-xuat-xu-ly">3.2. Phân tích kết quả tương quan đa biến &amp; Đề xuất xử lý</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-gia-tri-khuyet-thieu-kiem-dinh-little-s-mcar-test">4. Phân tích Giá trị Khuyết thiếu &amp; Kiểm định Little’s MCAR Test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-so-ly-thuyet-co-che-khuyet-thieu-mcar-mar-mnar-va-little-s-mcar-test">4.1. Cơ sở lý thuyết: Cơ chế khuyết thiếu (MCAR, MAR, MNAR) và Little’s MCAR Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bien-luan-co-che-khuyet-thieu-mcar-mar-mnar-huong-xu-ly">4.2. Biện luận cơ chế khuyết thiếu (MCAR / MAR / MNAR) &amp; Hướng xử lý</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -355,18 +375,1183 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chuong-1-kham-pha-du-lieu-bang-tabular-eda">
-<h1>Chương 1: Khám phá Dữ liệu Bảng (Tabular EDA)<a class="headerlink" href="#chuong-1-kham-pha-du-lieu-bang-tabular-eda" title="Link to this heading">#</a></h1>
-<blockquote>
-<div><p><em>Trạng thái: Khung chương khởi tạo (Giai đoạn 1). Nội dung EDA chuyên sâu sẽ được triển khai ở Giai đoạn 2.</em></p>
-</div></blockquote>
-<section id="muc-tieu-chuong">
-<h2>Mục tiêu chương<a class="headerlink" href="#muc-tieu-chuong" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="chuong-1-phan-tich-thong-ke-kham-pha-du-lieu-bang-tabular-eda">
+<h1>Chương 1: Phân tích Thống kê Khám phá Dữ liệu Bảng (Tabular EDA)<a class="headerlink" href="#chuong-1-phan-tich-thong-ke-kham-pha-du-lieu-bang-tabular-eda" title="Link to this heading">#</a></h1>
+<p>Trong chương này, chúng ta thực hiện <strong>Phân tích Thống kê Khám phá (Exploratory Data Analysis – EDA) chuyên sâu</strong> trên tập dữ liệu <strong>Adult Census Income</strong> trước khi thiết kế pipeline tiền xử lý ở Chương 2. Mọi bước phân tích đều tuân thủ cấu trúc 3 phần: <strong>(1) Cơ sở lý thuyết &amp; công thức toán học <span class="math notranslate nohighlight">\(\rightarrow\)</span> (2) Cài đặt Python tái sản xuất <span class="math notranslate nohighlight">\(\rightarrow\)</span> (3) Phân tích định lượng &amp; nhận xét phê bình</strong>.</p>
+<section id="muc-tieu-phan-tich">
+<h2>Mục tiêu phân tích<a class="headerlink" href="#muc-tieu-phan-tich" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Tổng quan cấu trúc dữ liệu:</strong> Kiểm định quy mô (<span class="math notranslate nohighlight">\(\ge 10{,}000\)</span> dòng, <span class="math notranslate nohighlight">\(\ge 10\)</span> thuộc tính), phân loại biến số / biến phân loại, độ đa dạng nhãn (cardinality) và phân bố nhãn mục tiêu (<code class="docutils literal notranslate"><span class="pre">income</span></code>).</p></li>
+<li><p><strong>Kiểm định phân phối chuẩn (Normality Tests):</strong> Áp dụng kiểm định <strong>D’Agostino–Pearson</strong> (<span class="math notranslate nohighlight">\(n &gt; 5{,}000\)</span>) kết hợp độ lệch (skewness), độ nhọn (kurtosis), biểu đồ histogram/KDE và Q-Q plot để làm căn cứ chọn phương pháp chuẩn hóa phù hợp.</p></li>
+<li><p><strong>Phân tích tương quan đa biến (Multivariate Correlation):</strong> So sánh ma trận tương quan <strong>Pearson</strong> và <strong>Spearman</strong>, sàng lọc đa cộng tuyến mạnh (<span class="math notranslate nohighlight">\(|r| &gt; 0.9\)</span>) và kiểm tra dư thừa cấu trúc giữa biến phân loại và biến số.</p></li>
+<li><p><strong>Phân tích cơ chế khuyết thiếu (Missingness Mechanism):</strong> Trực quan hóa ma trận khuyết thiếu bằng <code class="docutils literal notranslate"><span class="pre">missingno</span></code>, thực hiện kiểm định <strong>Little’s MCAR test</strong> và kiểm định phụ thuộc thống kê để phân loại cơ chế <strong>MCAR / MAR / MNAR</strong>.</p></li>
+</ol>
+</section>
+<section id="tai-du-lieu-va-kham-pha-cau-truc-tong-quan">
+<h2>1. Tải dữ liệu và Khám phá Cấu trúc Tổng quan<a class="headerlink" href="#tai-du-lieu-va-kham-pha-cau-truc-tong-quan" title="Link to this heading">#</a></h2>
+<section id="nguon-du-lieu-va-co-che-tai-tu-dong">
+<h3>1.1. Nguồn dữ liệu và cơ chế tải tự động<a class="headerlink" href="#nguon-du-lieu-va-co-che-tai-tu-dong" title="Link to this heading">#</a></h3>
+<p>Tập dữ liệu <strong>Adult Census Income</strong> (từ kho công khai Hugging Face: <code class="docutils literal notranslate"><span class="pre">scikit-learn/adult-census-income</span></code>) thu thập thông tin nhân khẩu học và thu nhập từ cuộc điều tra dân số Hoa Kỳ năm 1994. Để đảm bảo tính tái sản xuất (reproducibility) mà không đẩy tệp dữ liệu lớn lên GitHub, mã nguồn dưới đây tự động kiểm tra tệp cục bộ <code class="docutils literal notranslate"><span class="pre">../data/raw/tabular_adult.csv</span></code> và gọi hàm <code class="docutils literal notranslate"><span class="pre">prepare_and_verify_tabular()</span></code> từ <code class="docutils literal notranslate"><span class="pre">src/prepare_data.py</span></code> nếu tệp chưa tồn tại. Trong dữ liệu gốc, các giá trị khuyết thiếu được ký hiệu bằng chuỗi <code class="docutils literal notranslate"><span class="pre">&quot;?&quot;</span></code> và đã được chuyển về chuẩn <code class="docutils literal notranslate"><span class="pre">NaN</span></code> để xử lý nhất quán.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">missingno</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">msno</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+
+<span class="c1"># Cố định seed và cấu hình hiển thị nhất quán</span>
+<span class="n">RANDOM_STATE</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">RANDOM_STATE</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"whitegrid"</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">"muted"</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"figure.dpi"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">110</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">"axes.titlesize"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="c1"># Xác định đường dẫn gốc của repository</span>
+<span class="n">PROJECT_ROOT</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="k">if</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"book"</span> <span class="k">else</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">PROJECT_ROOT</span><span class="p">))</span>
+
+<span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">PROJECT_ROOT</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"raw"</span> <span class="o">/</span> <span class="s2">"tabular_adult.csv"</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">DATA_PATH</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">src.prepare_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">prepare_and_verify_tabular</span>
+    <span class="n">prepare_and_verify_tabular</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">))</span>
+
+<span class="n">df_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">)</span>
+
+<span class="c1"># Tách danh sách cột số, cột phân loại và biến mục tiêu</span>
+<span class="n">TARGET_COL</span> <span class="o">=</span> <span class="s2">"income"</span>
+<span class="n">num_cols</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">cat_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="n">TARGET_COL</span><span class="p">]</span>
+
+<span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">n_duplicates</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">target_counts</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">TARGET_COL</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">target_ratios</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">TARGET_COL</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">imbalance_ratio</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">target_counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">target_counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kích thước tập dữ liệu : </span><span class="si">{</span><span class="n">n_rows</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> dòng × </span><span class="si">{</span><span class="n">n_cols</span><span class="si">}</span><span class="s2"> cột"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Số dòng trùng lặp hoàn toàn : </span><span class="si">{</span><span class="n">n_duplicates</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">n_duplicates</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_rows</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Thuộc tính số (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">num_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">)      : </span><span class="si">{</span><span class="n">num_cols</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Thuộc tính phân loại (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cat_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">cat_cols</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tỷ lệ mất cân bằng lớp : </span><span class="si">{</span><span class="n">imbalance_ratio</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> : 1 (&lt;=50K: </span><span class="si">{</span><span class="n">target_ratios</span><span class="p">[</span><span class="s1">'&lt;=50K'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% | &gt;50K: </span><span class="si">{</span><span class="n">target_ratios</span><span class="p">[</span><span class="s1">'&gt;50K'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+
+<span class="c1"># Bảng tóm tắt kiểu dữ liệu, số giá trị duy nhất và tỷ lệ khuyết thiếu</span>
+<span class="n">overview_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">"Dtype"</span><span class="p">:</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">),</span>
+    <span class="s2">"Non-Null"</span><span class="p">:</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+    <span class="s2">"Missing Count"</span><span class="p">:</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+    <span class="s2">"Missing (%)"</span><span class="p">:</span> <span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+    <span class="s2">"Unique Values"</span><span class="p">:</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">nunique</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="p">})</span>
+<span class="n">display</span><span class="p">(</span><span class="n">overview_df</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Thống kê mô tả các thuộc tính số:"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_raw</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading readme: 0.00B [00:00, ?B/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading readme: 1.61kB [00:00, 4.97MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data:   0%|          | 0.00/4.10M [00:00&lt;?, ?B/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data:  14%|█▍        | 584k/4.10M [00:00&lt;00:00, 4.74MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data: 100%|██████████| 4.10M/4.10M [00:00&lt;00:00, 28.8MB/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating train split:   0%|          | 0/32561 [00:00&lt;?, ? examples/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generating train split: 100%|██████████| 32561/32561 [00:00&lt;00:00, 469650.93 examples/s]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== KIỂM TRA DỮ LIỆU BẢNG (PHẦN A) ===
+- Số dòng: 32,561 (Yêu cầu &gt;= 10,000)
+- Số thuộc tính: 15 (Yêu cầu &gt;= 10)
+- Thuộc tính số (6): ['age', 'fnlwgt', 'education.num', 'capital.gain', 'capital.loss', 'hours.per.week']
+- Thuộc tính phân loại (9): ['workclass', 'education', 'marital.status', 'occupation', 'relationship', 'race', 'sex', 'native.country', 'income']
+- Cột missing &gt;= 5%:
+occupation    5.66
+workclass     5.64
+dtype: float64
+- Cột high-cardinality (&gt;20 giá trị): ['native.country']
+- Phân bố nhãn mục tiêu:
+income
+&lt;=50K    0.7592
+&gt;50K     0.2408
+Name: proportion, dtype: float64
+
+Kích thước tập dữ liệu : 32,561 dòng × 15 cột
+Số dòng trùng lặp hoàn toàn : 24 (0.07%)
+Thuộc tính số (6)      : ['age', 'fnlwgt', 'education.num', 'capital.gain', 'capital.loss', 'hours.per.week']
+Thuộc tính phân loại (8): ['workclass', 'education', 'marital.status', 'occupation', 'relationship', 'race', 'sex', 'native.country']
+Tỷ lệ mất cân bằng lớp : 3.15 : 1 (&lt;=50K: 75.92% | &gt;50K: 24.08%)
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dtype</th>
+      <th>Non-Null</th>
+      <th>Missing Count</th>
+      <th>Missing (%)</th>
+      <th>Unique Values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>int64</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>73</td>
+    </tr>
+    <tr>
+      <th>workclass</th>
+      <td>object</td>
+      <td>30725</td>
+      <td>1836</td>
+      <td>5.64</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>fnlwgt</th>
+      <td>int64</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>21648</td>
+    </tr>
+    <tr>
+      <th>education</th>
+      <td>object</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>education.num</th>
+      <td>int64</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>marital.status</th>
+      <td>object</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <td>object</td>
+      <td>30718</td>
+      <td>1843</td>
+      <td>5.66</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>relationship</th>
+      <td>object</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>race</th>
+      <td>object</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <td>object</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>capital.gain</th>
+      <td>int64</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>119</td>
+    </tr>
+    <tr>
+      <th>capital.loss</th>
+      <td>int64</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>92</td>
+    </tr>
+    <tr>
+      <th>hours.per.week</th>
+      <td>int64</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <th>native.country</th>
+      <td>object</td>
+      <td>31978</td>
+      <td>583</td>
+      <td>1.79</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>income</th>
+      <td>object</td>
+      <td>32561</td>
+      <td>0</td>
+      <td>0.00</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Thống kê mô tả các thuộc tính số:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>50%</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>age</th>
+      <td>32561.0</td>
+      <td>38.58</td>
+      <td>13.64</td>
+      <td>17.0</td>
+      <td>28.0</td>
+      <td>37.0</td>
+      <td>48.0</td>
+      <td>90.0</td>
+    </tr>
+    <tr>
+      <th>fnlwgt</th>
+      <td>32561.0</td>
+      <td>189778.37</td>
+      <td>105549.98</td>
+      <td>12285.0</td>
+      <td>117827.0</td>
+      <td>178356.0</td>
+      <td>237051.0</td>
+      <td>1484705.0</td>
+    </tr>
+    <tr>
+      <th>education.num</th>
+      <td>32561.0</td>
+      <td>10.08</td>
+      <td>2.57</td>
+      <td>1.0</td>
+      <td>9.0</td>
+      <td>10.0</td>
+      <td>12.0</td>
+      <td>16.0</td>
+    </tr>
+    <tr>
+      <th>capital.gain</th>
+      <td>32561.0</td>
+      <td>1077.65</td>
+      <td>7385.29</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>99999.0</td>
+    </tr>
+    <tr>
+      <th>capital.loss</th>
+      <td>32561.0</td>
+      <td>87.30</td>
+      <td>402.96</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>4356.0</td>
+    </tr>
+    <tr>
+      <th>hours.per.week</th>
+      <td>32561.0</td>
+      <td>40.44</td>
+      <td>12.35</td>
+      <td>1.0</td>
+      <td>40.0</td>
+      <td>40.0</td>
+      <td>45.0</td>
+      <td>99.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="nhan-xet-so-bo-ve-cau-truc-du-lieu">
+<h3>1.2. Nhận xét sơ bộ về cấu trúc dữ liệu<a class="headerlink" href="#nhan-xet-so-bo-ve-cau-truc-du-lieu" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Kiểm định phân phối chuẩn (Shapiro-Wilk / D’Agostino-Pearson) cho toàn bộ thuộc tính số.</p></li>
-<li><p>Phân tích tương quan đa biến (Pearson &amp; Spearman heatmap) và xác định cặp đa cộng tuyến mạnh (<span class="math notranslate nohighlight">\(|r| &gt; 0.9\)</span>).</p></li>
-<li><p>Trực quan hóa ma trận khuyết thiếu (<code class="docutils literal notranslate"><span class="pre">missingno</span></code>), kiểm định Little’s MCAR test và biện luận cơ chế MCAR/MAR/MNAR.</p></li>
+<li><p><strong>Đáp ứng toàn diện yêu cầu đề bài:</strong> Tập dữ liệu gồm <strong>32.561 bản ghi</strong> (<span class="math notranslate nohighlight">\(\ge 10{,}000\)</span>) và <strong>15 thuộc tính</strong> (<span class="math notranslate nohighlight">\(\ge 10\)</span>), bao gồm 6 thuộc tính số, 8 thuộc tính phân loại và 1 biến mục tiêu nhị phân (<code class="docutils literal notranslate"><span class="pre">income</span></code>).</p></li>
+<li><p><strong>Tỷ lệ khuyết thiếu tự nhiên <span class="math notranslate nohighlight">\(\ge 5\%\)</span>:</strong> Hai thuộc tính phân loại quan trọng là <code class="docutils literal notranslate"><span class="pre">occupation</span></code> (5.66%) và <code class="docutils literal notranslate"><span class="pre">workclass</span></code> (5.64%) vượt ngưỡng 5% giá trị thiếu tự nhiên, cùng với <code class="docutils literal notranslate"><span class="pre">native.country</span></code> (1.79%).</p></li>
+<li><p><strong>Biến phân loại nhiều giá trị (High-Cardinality):</strong> Thuộc tính <code class="docutils literal notranslate"><span class="pre">native.country</span></code> có <strong>41 giá trị duy nhất</strong> (<span class="math notranslate nohighlight">\(&gt; 20\)</span>), tạo điều kiện lý tưởng để kiểm chứng <strong>Binary Encoding</strong> so với One-Hot Encoding ở Chương 2.</p></li>
+<li><p><strong>Mất cân bằng lớp (Class Imbalance):</strong> Nhãn <code class="docutils literal notranslate"><span class="pre">&lt;=50K</span></code> chiếm <strong>75.92%</strong> và <code class="docutils literal notranslate"><span class="pre">&gt;50K</span></code> chiếm <strong>24.08%</strong> (tỷ lệ xấp xỉ <span class="math notranslate nohighlight">\(3.15:1\)</span>), phù hợp để triển khai mục <code class="docutils literal notranslate"><span class="pre">[Nâng</span> <span class="pre">cao]</span></code> xử lý mất cân bằng lớp (SMOTE, ADASYN, Random Under-sampling).</p></li>
+<li><p><strong>Phân tán thang đo cực lớn:</strong> Các biến số có miền giá trị chênh lệch hàng trăm nghìn lần (<code class="docutils literal notranslate"><span class="pre">education.num</span></code> trong <span class="math notranslate nohighlight">\([1, 16]\)</span> so với <code class="docutils literal notranslate"><span class="pre">fnlwgt</span></code> lên đến <span class="math notranslate nohighlight">\(1.48 \times 10^6\)</span> và <code class="docutils literal notranslate"><span class="pre">capital.gain</span></code> lên đến <span class="math notranslate nohighlight">\(99{,}999\)</span>). Đặc biệt, <code class="docutils literal notranslate"><span class="pre">capital.gain</span></code> và <code class="docutils literal notranslate"><span class="pre">capital.loss</span></code> có phân vị thứ 25, 50 và 75 đều bằng 0 (zero-inflated distribution), báo hiệu phân phối lệch cực mạnh.</p></li>
 </ul>
+</section>
+</section>
+<section id="kiem-dinh-phan-phoi-chuan-normality-testing">
+<h2>2. Kiểm định Phân phối Chuẩn (Normality Testing)<a class="headerlink" href="#kiem-dinh-phan-phoi-chuan-normality-testing" title="Link to this heading">#</a></h2>
+<section id="co-so-ly-thuyet-va-cong-thuc-toan-hoc">
+<h3>2.1. Cơ sở lý thuyết và công thức toán học<a class="headerlink" href="#co-so-ly-thuyet-va-cong-thuc-toan-hoc" title="Link to this heading">#</a></h3>
+<p>Việc kiểm định giả thuyết phân phối chuẩn giúp xác định liệu các phép biến đổi tuyến tính dựa trên trung bình và độ lệch chuẩn (như Z-score) có bị méo bởi độ lệch (skewness) và ngoại lai hay không.</p>
+<p>Giả thuyết kiểm định cho mỗi thuộc tính số <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>: Dữ liệu <span class="math notranslate nohighlight">\(X\)</span> được lấy mẫu từ một phân phối chuẩn <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma^2)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span>: Dữ liệu <span class="math notranslate nohighlight">\(X\)</span> không tuân theo phân phối chuẩn.</p></li>
+</ul>
+<p>Lựa chọn kiểm định theo cỡ mẫu <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ul class="simple">
+<li><p><strong>Shapiro–Wilk (<span class="math notranslate nohighlight">\(n \le 5{,}000\)</span>):</strong> Tính thống kê <span class="math notranslate nohighlight">\(W = \dfrac{\left(\sum_{i=1}^{n} a_i x_{(i)}\right)^2}{\sum_{i=1}^{n} (x_i - \bar{x})^2}\)</span>, rất nhạy với sai lệch ở đuôi nhưng dễ bác bỏ <span class="math notranslate nohighlight">\(H_0\)</span> quá mức khi <span class="math notranslate nohighlight">\(n\)</span> lớn.</p></li>
+<li><p><strong>D’Agostino–Pearson (<span class="math notranslate nohighlight">\(n &gt; 5{,}000\)</span>):</strong> Kết hợp chuẩn hóa độ lệch (<span class="math notranslate nohighlight">\(g_1\)</span>) và độ nhọn (<span class="math notranslate nohighlight">\(g_2\)</span>) thành thống kê tổng hợp <span class="math notranslate nohighlight">\(K^2\)</span>:
+$<span class="math notranslate nohighlight">\(K^2 = Z^2(g_1) + Z^2(g_2) \;\xrightarrow{d}\; \chi^2_2 \quad \text{dưới } H_0\)</span><span class="math notranslate nohighlight">\(
+trong đó \)</span>g_1 = \dfrac{\frac{1}{n}\sum (x_i - \bar{x})^3}{s^3}<span class="math notranslate nohighlight">\( là hệ số bất đối xứng (skewness) và \)</span>g_2 = \dfrac{\frac{1}{n}\sum (x_i - \bar{x})^4}{s^4} - 3$ là hệ số nhọn dư (excess kurtosis).</p></li>
+</ul>
+<p>Do cỡ mẫu của Adult Census Income là <span class="math notranslate nohighlight">\(n = 32{,}561 &gt; 5{,}000\)</span>, ta sử dụng kiểm định <strong>D’Agostino–Pearson</strong> với mức ý nghĩa <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>. Nếu <span class="math notranslate nohighlight">\(\text{p-value} &lt; 0.05\)</span>, ta bác bỏ <span class="math notranslate nohighlight">\(H_0\)</span> và kết luận thuộc tính <strong>không chuẩn</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ALPHA</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">normality_records</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">num_cols</span><span class="p">:</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">n_obs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_obs</span> <span class="o">&lt;=</span> <span class="mi">5000</span><span class="p">:</span>
+        <span class="n">test_name</span> <span class="o">=</span> <span class="s2">"Shapiro-Wilk"</span>
+        <span class="n">stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">test_name</span> <span class="o">=</span> <span class="s2">"D'Agostino-Pearson"</span>
+        <span class="n">stat</span><span class="p">,</span> <span class="n">p_val</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">normaltest</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+
+    <span class="n">skew_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">series</span><span class="p">))</span>
+    <span class="n">kurt_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">kurtosis</span><span class="p">(</span><span class="n">series</span><span class="p">))</span>
+    <span class="n">is_normal</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_val</span> <span class="o">&gt;=</span> <span class="n">ALPHA</span><span class="p">)</span>
+
+    <span class="c1"># Đề xuất chiến lược chuẩn hóa dựa trên kết quả kiểm định và độ lệch</span>
+    <span class="k">if</span> <span class="n">is_normal</span><span class="p">:</span>
+        <span class="n">recommended_scaler</span> <span class="o">=</span> <span class="s2">"Z-score (StandardScaler)"</span>
+    <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">skew_val</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">kurt_val</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">7.0</span><span class="p">:</span>
+        <span class="n">recommended_scaler</span> <span class="o">=</span> <span class="s2">"QuantileTransform / RobustScaler"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">recommended_scaler</span> <span class="o">=</span> <span class="s2">"RobustScaler / Min-Max"</span>
+
+    <span class="n">normality_records</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">"Feature"</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+        <span class="s2">"Test"</span><span class="p">:</span> <span class="n">test_name</span><span class="p">,</span>
+        <span class="s2">"Statistic (K^2)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">stat</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">"p-value"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">p_val</span><span class="p">),</span>
+        <span class="s2">"Skewness"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">skew_val</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s2">"Excess Kurtosis"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">kurt_val</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="s2">"Distribution"</span><span class="p">:</span> <span class="s2">"Normal"</span> <span class="k">if</span> <span class="n">is_normal</span> <span class="k">else</span> <span class="s2">"Non-Normal"</span><span class="p">,</span>
+        <span class="s2">"Recommended Scaler"</span><span class="p">:</span> <span class="n">recommended_scaler</span><span class="p">,</span>
+    <span class="p">})</span>
+
+<span class="n">normality_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">normality_records</span><span class="p">)</span>
+<span class="n">normality_pvalues</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">normality_df</span><span class="p">[</span><span class="s2">"Feature"</span><span class="p">],</span> <span class="n">normality_df</span><span class="p">[</span><span class="s2">"p-value"</span><span class="p">]))</span>
+<span class="n">n_normal_features</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">normality_df</span><span class="p">[</span><span class="s2">"Distribution"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Normal"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">n_non_normal_features</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">normality_df</span><span class="p">[</span><span class="s2">"Distribution"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Non-Normal"</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kết quả kiểm định phân phối (alpha = </span><span class="si">{</span><span class="n">ALPHA</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">n_normal_features</span><span class="si">}</span><span class="s2"> chuẩn, </span><span class="si">{</span><span class="n">n_non_normal_features</span><span class="si">}</span><span class="s2"> không chuẩn."</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">normality_df</span><span class="p">)</span>
+
+<span class="c1"># Trực quan hóa Histogram + KDE và Q-Q Plot cho 6 thuộc tính số</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_cols</span><span class="p">),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">3.2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">num_cols</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">num_cols</span><span class="p">):</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="c1"># Histogram + KDE</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#2b6cb0"</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> — Histogram &amp; KDE (Skew=</span><span class="si">{</span><span class="n">normality_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="s1">'Skewness'</span><span class="p">]</span><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"Kurt=</span><span class="si">{</span><span class="n">normality_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="s1">'Excess Kurtosis'</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span>
+    <span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Tần suất"</span><span class="p">)</span>
+
+    <span class="c1"># Q-Q Plot</span>
+    <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s2">"norm"</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> — Normal Q-Q Plot (p = </span><span class="si">{</span><span class="n">normality_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="w"> </span><span class="s1">'p-value'</span><span class="p">]</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_markersize</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kết quả kiểm định phân phối (alpha = 0.05): 0 chuẩn, 6 không chuẩn.
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Feature</th>
+      <th>Test</th>
+      <th>Statistic (K^2)</th>
+      <th>p-value</th>
+      <th>Skewness</th>
+      <th>Excess Kurtosis</th>
+      <th>Distribution</th>
+      <th>Recommended Scaler</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>age</td>
+      <td>D'Agostino-Pearson</td>
+      <td>1526.01</td>
+      <td>0.000000e+00</td>
+      <td>0.559</td>
+      <td>-0.166</td>
+      <td>Non-Normal</td>
+      <td>RobustScaler / Min-Max</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>fnlwgt</td>
+      <td>D'Agostino-Pearson</td>
+      <td>10662.51</td>
+      <td>0.000000e+00</td>
+      <td>1.447</td>
+      <td>6.218</td>
+      <td>Non-Normal</td>
+      <td>RobustScaler / Min-Max</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>education.num</td>
+      <td>D'Agostino-Pearson</td>
+      <td>817.16</td>
+      <td>3.589720e-178</td>
+      <td>-0.312</td>
+      <td>0.623</td>
+      <td>Non-Normal</td>
+      <td>RobustScaler / Min-Max</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>capital.gain</td>
+      <td>D'Agostino-Pearson</td>
+      <td>55096.55</td>
+      <td>0.000000e+00</td>
+      <td>11.953</td>
+      <td>154.775</td>
+      <td>Non-Normal</td>
+      <td>QuantileTransform / RobustScaler</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>capital.loss</td>
+      <td>D'Agostino-Pearson</td>
+      <td>29331.40</td>
+      <td>0.000000e+00</td>
+      <td>4.594</td>
+      <td>20.373</td>
+      <td>Non-Normal</td>
+      <td>QuantileTransform / RobustScaler</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>hours.per.week</td>
+      <td>D'Agostino-Pearson</td>
+      <td>2508.92</td>
+      <td>0.000000e+00</td>
+      <td>0.228</td>
+      <td>2.916</td>
+      <td>Non-Normal</td>
+      <td>RobustScaler / Min-Max</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/0f7742e2341eabf7ddace9be4e46ec4124da1d02213b3216968fea0fea2a176c.png" src="_images/0f7742e2341eabf7ddace9be4e46ec4124da1d02213b3216968fea0fea2a176c.png" />
+</div>
+</div>
+</section>
+<section id="phan-tich-ket-qua-kiem-dinh-phan-phoi-nhan-xet-phe-binh">
+<h3>2.2. Phân tích kết quả kiểm định phân phối &amp; Nhận xét phê bình<a class="headerlink" href="#phan-tich-ket-qua-kiem-dinh-phan-phoi-nhan-xet-phe-binh" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Toàn bộ 6/6 thuộc tính số đều bác bỏ <span class="math notranslate nohighlight">\(H_0\)</span> (<span class="math notranslate nohighlight">\(\text{p-value} \ll 0.05\)</span>):</strong> Không có thuộc tính nào tuân theo phân phối chuẩn. Tuy nhiên, cần <strong>nhận xét phê bình về lực kiểm định (statistical power)</strong>: khi <span class="math notranslate nohighlight">\(n = 32{,}561\)</span>, kiểm định D’Agostino–Pearson rất nhạy và có thể bác bỏ <span class="math notranslate nohighlight">\(H_0\)</span> ngay cả với sai lệch nhỏ. Do đó, việc kết hợp hệ số <strong>Skewness</strong>, <strong>Excess Kurtosis</strong> và <strong>Q-Q Plot</strong> là bắt buộc để phân tầng mức độ phi chuẩn:</p>
+<ol class="arabic simple">
+<li><p><strong>Nhóm lệch cực nặng &amp; tập trung tại 0 (Heavy-tailed / Zero-inflated):</strong> <code class="docutils literal notranslate"><span class="pre">capital.gain</span></code> (Skewness <span class="math notranslate nohighlight">\(\approx 11.95\)</span>, Kurtosis <span class="math notranslate nohighlight">\(\approx 154.78\)</span>) và <code class="docutils literal notranslate"><span class="pre">capital.loss</span></code> (Skewness <span class="math notranslate nohighlight">\(\approx 4.59\)</span>, Kurtosis <span class="math notranslate nohighlight">\(\approx 20.37\)</span>). Trên Q-Q Plot, phần lớn điểm nằm ngang tại 0 rồi vọt thẳng lên ở đuôi phải. Áp dụng Min-Max hoặc Z-score đơn thuần lên nhóm này sẽ khiến 90%+ mẫu bị nén sát một đầu. <strong>QuantileTransformer</strong> hoặc <strong>RobustScaler</strong> (kết hợp biến đổi log/nhị phân hóa nếu cần) phù hợp hơn nhiều.</p></li>
+<li><p><strong>Nhóm lệch phải trung bình – mạnh:</strong> <code class="docutils literal notranslate"><span class="pre">fnlwgt</span></code> (Skewness <span class="math notranslate nohighlight">\(\approx 1.45\)</span>, Kurtosis <span class="math notranslate nohighlight">\(\approx 6.22\)</span>) và <code class="docutils literal notranslate"><span class="pre">age</span></code> (Skewness <span class="math notranslate nohighlight">\(\approx 0.56\)</span>, cắt cụt ở cận dưới 17 tuổi). <strong>RobustScaler</strong> (dựa trên trung vị và IQR) giúp kháng ngoại lai tốt hơn Z-score.</p></li>
+<li><p><strong>Nhóm đa đỉnh / rời rạc có thứ tự:</strong> <code class="docutils literal notranslate"><span class="pre">hours.per.week</span></code> (nhọn mạnh quanh mốc 40 giờ/tuần, Kurtosis <span class="math notranslate nohighlight">\(\approx 2.92\)</span>) và <code class="docutils literal notranslate"><span class="pre">education.num</span></code> (rời rạc 1–16, lệch trái nhẹ).</p></li>
+</ol>
+</li>
+<li><p><strong>Hệ quả cho Chương 2:</strong> Kết quả này chứng minh rằng giả định phân phối chuẩn bị vi phạm toàn diện; do đó ở Chương 2, chúng ta sẽ kiểm chứng định lượng sự vượt trội của <strong>RobustScaler</strong> và <strong>QuantileTransformer</strong> so với <strong>Min-Max</strong> và <strong>Z-score</strong> thông qua kiểm định đồng nhất phương sai Levene và Violin plot.</p></li>
+</ul>
+</section>
+</section>
+<section id="phan-tich-tuong-quan-da-bien-multivariate-correlation-analysis">
+<h2>3. Phân tích Tương quan Đa biến (Multivariate Correlation Analysis)<a class="headerlink" href="#phan-tich-tuong-quan-da-bien-multivariate-correlation-analysis" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>3.1. Cơ sở lý thuyết và công thức toán học<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Để đánh giá mức độ liên hệ tuyến tính, liên hệ đơn điệu và phát hiện đa cộng tuyến (multicollinearity) giữa các thuộc tính, ta tính đồng thời hai hệ số tương quan:</p>
+<ul class="simple">
+<li><p><strong>Hệ số tương quan Pearson (<span class="math notranslate nohighlight">\(r\)</span>):</strong> Đo mức độ tương quan <strong>tuyến tính</strong> giữa hai biến liên tục <span class="math notranslate nohighlight">\(X, Y\)</span>:
+$<span class="math notranslate nohighlight">\(r_{XY} = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n} (x_i - \bar{x})^2} \sqrt{\sum_{i=1}^{n} (y_i - \bar{y})^2}}\)</span>$</p></li>
+<li><p><strong>Hệ số tương quan hạng Spearman (<span class="math notranslate nohighlight">\(\rho\)</span>):</strong> Đo mức độ tương quan <strong>đơn điệu</strong> dựa trên hạng (rank) <span class="math notranslate nohighlight">\(R(x_i), R(y_i)\)</span>, nhờ đó kháng ngoại lai và không đòi hỏi giả định tuyến tính hay phân phối chuẩn:
+$<span class="math notranslate nohighlight">\(\rho_{XY} = \text{corr}\big(R(X), R(Y)\big)\)</span>$</p></li>
+</ul>
+<p>Ngưỡng cảnh báo đa cộng tuyến mạnh theo yêu cầu là <span class="math notranslate nohighlight">\(|r| &gt; 0.9\)</span> (hoặc <span class="math notranslate nohighlight">\(|\rho| &gt; 0.9\)</span>). Ngoài ra, vì tập dữ liệu có sự kết hợp giữa biến số và biến phân loại, ta kiểm tra thêm mối quan hệ cấu trúc giữa <code class="docutils literal notranslate"><span class="pre">education</span></code> (phân loại) và <code class="docutils literal notranslate"><span class="pre">education.num</span></code> (số) để phát hiện <strong>dư thừa tuyệt đối (exact redundancy)</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_pearson</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"pearson"</span><span class="p">)</span>
+<span class="n">corr_spearman</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">"spearman"</span><span class="p">)</span>
+
+<span class="c1"># Tìm các cặp có |r| &gt; 0.9 và liệt kê top các cặp tương quan mạnh nhất</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">extract_corr_pairs</span><span class="p">(</span><span class="n">corr_mat</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+    <span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">corr_mat</span><span class="o">.</span><span class="n">columns</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cols</span><span class="p">)):</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">corr_mat</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
+            <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">"Feature 1"</span><span class="p">:</span> <span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="s2">"Feature 2"</span><span class="p">:</span> <span class="n">cols</span><span class="p">[</span><span class="n">j</span><span class="p">],</span>
+                <span class="s2">"Correlation"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                <span class="s2">"Abs_Correlation"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+            <span class="p">})</span>
+    <span class="n">all_pairs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"Abs_Correlation"</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">strong_pairs</span> <span class="o">=</span> <span class="n">all_pairs</span><span class="p">[</span><span class="n">all_pairs</span><span class="p">[</span><span class="s2">"Abs_Correlation"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">strong_pairs</span><span class="p">,</span> <span class="n">all_pairs</span>
+
+<span class="n">strong_pearson_pairs</span><span class="p">,</span> <span class="n">all_pearson_pairs</span> <span class="o">=</span> <span class="n">extract_corr_pairs</span><span class="p">(</span><span class="n">corr_pearson</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">strong_spearman_pairs</span><span class="p">,</span> <span class="n">all_spearman_pairs</span> <span class="o">=</span> <span class="n">extract_corr_pairs</span><span class="p">(</span><span class="n">corr_spearman</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+<span class="n">max_abs_pearson</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">all_pearson_pairs</span><span class="p">[</span><span class="s2">"Abs_Correlation"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">max_abs_spearman</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">all_spearman_pairs</span><span class="p">[</span><span class="s2">"Abs_Correlation"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Kiểm tra quan hệ 1-1 giữa education (categorical) và education.num (numerical)</span>
+<span class="n">edu_mapping</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"education"</span><span class="p">)[</span><span class="s2">"education.num"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span>
+<span class="n">is_edu_exact_redundant</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">((</span><span class="n">edu_mapping</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="ow">and</span> <span class="n">df_raw</span><span class="p">[</span><span class="s2">"education"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span> <span class="o">==</span> <span class="n">df_raw</span><span class="p">[</span><span class="s2">"education.num"</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Số cặp thuộc tính số có |Pearson r| &gt; 0.9  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">strong_pearson_pairs</span><span class="p">)</span><span class="si">}</span><span class="s2"> (max |r| = </span><span class="si">{</span><span class="n">max_abs_pearson</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Số cặp thuộc tính số có |Spearman rho| &gt; 0.9: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">strong_spearman_pairs</span><span class="p">)</span><span class="si">}</span><span class="s2"> (max |rho| = </span><span class="si">{</span><span class="n">max_abs_spearman</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kiểm tra dư thừa tuyệt đối (education &lt;-&gt; education.num): </span><span class="si">{</span><span class="n">is_edu_exact_redundant</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Top 5 cặp tương quan Pearson mạnh nhất:"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_pearson_pairs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Top 5 cặp tương quan Spearman mạnh nhất:"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">all_spearman_pairs</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Vẽ Heatmap song song Pearson và Spearman</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">))</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">corr_pearson</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">corr_pearson</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">".3f"</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"coolwarm"</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Ma trận Tương quan Pearson (Tuyến tính)"</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">corr_spearman</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">".3f"</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"coolwarm"</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Ma trận Tương quan Spearman (Đơn điệu theo hạng)"</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Số cặp thuộc tính số có |Pearson r| &gt; 0.9  : 0 (max |r| = 0.1481)
+Số cặp thuộc tính số có |Spearman rho| &gt; 0.9: 0 (max |rho| = 0.1672)
+Kiểm tra dư thừa tuyệt đối (education &lt;-&gt; education.num): True
+
+Top 5 cặp tương quan Pearson mạnh nhất:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Feature 1</th>
+      <th>Feature 2</th>
+      <th>Correlation</th>
+      <th>Abs_Correlation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>education.num</td>
+      <td>hours.per.week</td>
+      <td>0.1481</td>
+      <td>0.1481</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>education.num</td>
+      <td>capital.gain</td>
+      <td>0.1226</td>
+      <td>0.1226</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>education.num</td>
+      <td>capital.loss</td>
+      <td>0.0799</td>
+      <td>0.0799</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>capital.gain</td>
+      <td>hours.per.week</td>
+      <td>0.0784</td>
+      <td>0.0784</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>age</td>
+      <td>capital.gain</td>
+      <td>0.0777</td>
+      <td>0.0777</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 5 cặp tương quan Spearman mạnh nhất:
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Feature 1</th>
+      <th>Feature 2</th>
+      <th>Correlation</th>
+      <th>Abs_Correlation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>education.num</td>
+      <td>hours.per.week</td>
+      <td>0.1672</td>
+      <td>0.1672</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>age</td>
+      <td>hours.per.week</td>
+      <td>0.1429</td>
+      <td>0.1429</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>age</td>
+      <td>capital.gain</td>
+      <td>0.1249</td>
+      <td>0.1249</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>education.num</td>
+      <td>capital.gain</td>
+      <td>0.1191</td>
+      <td>0.1191</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>capital.gain</td>
+      <td>hours.per.week</td>
+      <td>0.0933</td>
+      <td>0.0933</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><img alt="_images/f3e6b0c2e614f23c0ea66376be328167c9924e90ee000799a982d0b812a29e0e.png" src="_images/f3e6b0c2e614f23c0ea66376be328167c9924e90ee000799a982d0b812a29e0e.png" />
+</div>
+</div>
+</section>
+<section id="phan-tich-ket-qua-tuong-quan-da-bien-de-xuat-xu-ly">
+<h3>3.2. Phân tích kết quả tương quan đa biến &amp; Đề xuất xử lý<a class="headerlink" href="#phan-tich-ket-qua-tuong-quan-da-bien-de-xuat-xu-ly" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Không có đa cộng tuyến mạnh giữa các biến số (<span class="math notranslate nohighlight">\(|r| &gt; 0.9\)</span>):</strong> Cả Pearson và Spearman đều ghi nhận <strong>0 cặp</strong> vượt ngưỡng 0.9. Mối liên hệ lớn nhất chỉ ở mức yếu–trung bình:</p>
+<ul>
+<li><p>Ở <strong>Pearson</strong>: <code class="docutils literal notranslate"><span class="pre">education.num</span></code> – <code class="docutils literal notranslate"><span class="pre">hours.per.week</span></code> (<span class="math notranslate nohighlight">\(r \approx 0.148\)</span>) và <code class="docutils literal notranslate"><span class="pre">education.num</span></code> – <code class="docutils literal notranslate"><span class="pre">capital.gain</span></code> (<span class="math notranslate nohighlight">\(r \approx 0.123\)</span>).</p></li>
+<li><p>Ở <strong>Spearman</strong>: <code class="docutils literal notranslate"><span class="pre">age</span></code> – <code class="docutils literal notranslate"><span class="pre">hours.per.week</span></code> (<span class="math notranslate nohighlight">\(\rho \approx 0.143\)</span>) và <code class="docutils literal notranslate"><span class="pre">education.num</span></code> – <code class="docutils literal notranslate"><span class="pre">hours.per.week</span></code> (<span class="math notranslate nohighlight">\(\rho \approx 0.167\)</span>).</p></li>
+</ul>
+</li>
+<li><p><strong>Sự khác biệt Pearson vs Spearman:</strong> Với cặp <code class="docutils literal notranslate"><span class="pre">age</span></code> – <code class="docutils literal notranslate"><span class="pre">hours.per.week</span></code>, Spearman (<span class="math notranslate nohighlight">\(\rho \approx 0.143\)</span>) cao hơn gấp đôi Pearson (<span class="math notranslate nohighlight">\(r \approx 0.069\)</span>). Điều này phản ánh mối quan hệ <strong>phi tuyến</strong> (số giờ làm tăng từ tuổi thanh niên đến trung niên rồi giảm mạnh ở tuổi nghỉ hưu) và sự ảnh hưởng của ngoại lai lên Pearson.</p></li>
+<li><p><strong>Phát hiện dư thừa cấu trúc quan trọng (<code class="docutils literal notranslate"><span class="pre">education</span></code> <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">education.num</span></code>):</strong> Kiểm tra ánh xạ chéo cho thấy <code class="docutils literal notranslate"><span class="pre">education</span></code> (biến phân loại 16 mức) và <code class="docutils literal notranslate"><span class="pre">education.num</span></code> (biến số nguyên 1–16) có <strong>tương ứng 1–1 tuyệt đối</strong> (<code class="docutils literal notranslate"><span class="pre">is_edu_exact_redundant</span> <span class="pre">=</span> <span class="pre">True</span></code>). Nếu giữ đồng thời cả hai cột và áp dụng One-Hot Encoding cho <code class="docutils literal notranslate"><span class="pre">education</span></code>, ma trận đặc trưng sẽ bị <strong>đa cộng tuyến hoàn hảo (perfect multicollinearity, <span class="math notranslate nohighlight">\(\text{VIF} = \infty\)</span>)</strong>.</p></li>
+<li><p><strong>Đề xuất xử lý cho Chương 2:</strong> Loại bỏ cột phân loại <code class="docutils literal notranslate"><span class="pre">education</span></code> (giữ lại <code class="docutils literal notranslate"><span class="pre">education.num</span></code> đã mang sẵn thứ bậc số học) trong pipeline huấn luyện chính, đồng thời kiểm chứng hiện tượng tăng vọt VIF khi mã hóa biến phân loại ở Chương 2.</p></li>
+</ul>
+</section>
+</section>
+<section id="phan-tich-gia-tri-khuyet-thieu-kiem-dinh-little-s-mcar-test">
+<h2>4. Phân tích Giá trị Khuyết thiếu &amp; Kiểm định Little’s MCAR Test<a class="headerlink" href="#phan-tich-gia-tri-khuyet-thieu-kiem-dinh-little-s-mcar-test" title="Link to this heading">#</a></h2>
+<section id="co-so-ly-thuyet-co-che-khuyet-thieu-mcar-mar-mnar-va-little-s-mcar-test">
+<h3>4.1. Cơ sở lý thuyết: Cơ chế khuyết thiếu (MCAR, MAR, MNAR) và Little’s MCAR Test<a class="headerlink" href="#co-so-ly-thuyet-co-che-khuyet-thieu-mcar-mar-mnar-va-little-s-mcar-test" title="Link to this heading">#</a></h3>
+<p>Theo phân loại của Rubin (1976), cơ chế phát sinh giá trị khuyết thiếu gồm 3 loại:</p>
+<ol class="arabic simple">
+<li><p><strong>MCAR (Missing Completely At Random):</strong> Xác suất bị khuyết độc lập hoàn toàn với cả dữ liệu quan sát được <span class="math notranslate nohighlight">\(Y_{\text{obs}}\)</span> lẫn dữ liệu bị khuyết <span class="math notranslate nohighlight">\(Y_{\text{mis}}\)</span>:
+$<span class="math notranslate nohighlight">\(P(M \mid Y_{\text{obs}}, Y_{\text{mis}}) = P(M)\)</span>$</p></li>
+<li><p><strong>MAR (Missing At Random):</strong> Xác suất bị khuyết chỉ phụ thuộc vào các biến đã quan sát được <span class="math notranslate nohighlight">\(Y_{\text{obs}}\)</span>, không phụ thuộc trực tiếp vào giá trị bị khuyết <span class="math notranslate nohighlight">\(Y_{\text{mis}}\)</span>:
+$<span class="math notranslate nohighlight">\(P(M \mid Y_{\text{obs}}, Y_{\text{mis}}) = P(M \mid Y_{\text{obs}})\)</span>$</p></li>
+<li><p><strong>MNAR (Missing Not At Random):</strong> Xác suất bị khuyết phụ thuộc trực tiếp vào chính giá trị chưa quan sát được <span class="math notranslate nohighlight">\(Y_{\text{mis}}\)</span> (hoặc yếu tố ẩn không có trong bảng).</p></li>
+</ol>
+<p><strong>Kiểm định Little’s MCAR Test (1988):</strong>
+Chia dữ liệu thành <span class="math notranslate nohighlight">\(J\)</span> mẫu hình khuyết thiếu (missingness patterns). Với mỗi mẫu hình <span class="math notranslate nohighlight">\(j\)</span> có cỡ mẫu <span class="math notranslate nohighlight">\(m_j\)</span>, vector trung bình quan sát <span class="math notranslate nohighlight">\(\bar{\mathbf{y}}_{\text{obs}, j}\)</span>, vector trung bình ước lượng toàn cục <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\mu}}_{\text{obs}, j}\)</span> và ma trận hiệp phương sai <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\Sigma}}_{\text{obs}, j}\)</span>, thống kê Little được định nghĩa là:
+$<span class="math notranslate nohighlight">\(d^2 = \sum_{j=1}^{J} m_j \left(\bar{\mathbf{y}}_{\text{obs}, j} - \hat{\boldsymbol{\mu}}_{\text{obs}, j}\right)^\top \hat{\boldsymbol{\Sigma}}_{\text{obs}, j}^{-1} \left(\bar{\mathbf{y}}_{\text{obs}, j} - \hat{\boldsymbol{\mu}}_{\text{obs}, j}\right) \;\sim\; \chi^2_{\text{df}}\)</span><span class="math notranslate nohighlight">\(
+với bậc tự do \)</span>\text{df} = \sum_{j=1}^{J} p_j - p<span class="math notranslate nohighlight">\(, trong đó \)</span>p_j<span class="math notranslate nohighlight">\( là số biến quan sát được trong mẫu hình \)</span>j<span class="math notranslate nohighlight">\( và \)</span>p$ là tổng số biến đưa vào kiểm định.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>: Dữ liệu khuyết thiếu tuân theo cơ chế <strong>MCAR</strong>.</p></li>
+<li><p>Nếu <span class="math notranslate nohighlight">\(\text{p-value} &lt; 0.05\)</span>, ta bác bỏ <span class="math notranslate nohighlight">\(H_0\)</span>, kết luận dữ liệu <strong>không phải MCAR</strong> (tức là MAR hoặc MNAR).</p></li>
+</ul>
+<p><em>Lưu ý kỹ thuật:</em> Do các cột bị khuyết trong Adult Census là <strong>biến phân loại</strong> (<code class="docutils literal notranslate"><span class="pre">workclass</span></code>, <code class="docutils literal notranslate"><span class="pre">occupation</span></code>, <code class="docutils literal notranslate"><span class="pre">native.country</span></code>), để chạy Little’s MCAR test chặt chẽ trên không gian số, ta mã hóa chỉ số khuyết thiếu kết hợp với 6 biến số quan sát (kiểm tra xem phân phối trung bình đa biến của 6 biến số có khác biệt giữa các mẫu hình khuyết thiếu hay không — đây chính là dạng tổng quát của Little’s test cho cấu trúc khuyết thiếu theo nhóm mẫu hình), đồng thời chạy kiểm định phụ thuộc <strong>Mann–Whitney U</strong> và <strong>Chi-square</strong> giữa cờ khuyết thiếu với <code class="docutils literal notranslate"><span class="pre">age</span></code>, <code class="docutils literal notranslate"><span class="pre">hours.per.week</span></code> và <code class="docutils literal notranslate"><span class="pre">income</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Trực quan hóa ma trận khuyết thiếu bằng thư viện missingno</span>
+<span class="n">missing_cols</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df_raw</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Các cột có giá trị khuyết thiếu (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">missing_cols</span><span class="p">)</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">missing_cols</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">msno</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#3182ce"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Tỷ lệ giá trị hiện hữu theo từng thuộc tính (missingno.bar)"</span><span class="p">)</span>
+
+<span class="n">msno</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Tương quan khuyết thiếu giữa các cột (missingno.heatmap)"</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Ma trận khuyết thiếu (missing data matrix)</span>
+<span class="n">ax_mat</span> <span class="o">=</span> <span class="n">msno</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">df_raw</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">sparkline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Ma trận khuyết thiếu dữ liệu (Missing Data Matrix)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 2. Cài đặt kiểm định Little's MCAR Test (1988)</span>
+<span class="c1"># Ta đưa 6 biến số quan sát + 3 biến khuyết thiếu đã mã hóa tần suất/chỉ số vào ma trận kiểm định</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">little_mcar_test</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">'''</span>
+<span class="sd">    Tính thống kê Little's MCAR test (1988) trên DataFrame gồm các cột số</span>
+<span class="sd">    (có thể chứa NaN ở các cột phân loại đã được mã hóa số giữ nguyên NaN).</span>
+<span class="sd">    Trả về: (chi2_stat, df, p_value, n_patterns).</span>
+<span class="sd">    '''</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="c1"># Ước lượng tham số toàn cục (pairwise available-case / EM-like initialization)</span>
+    <span class="n">mu_hat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">sigma_hat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+    <span class="c1"># Regularize nhẹ tránh ma trận suy biến số học</span>
+    <span class="n">sigma_hat</span> <span class="o">=</span> <span class="n">sigma_hat</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">sigma_hat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1e-8</span>
+
+    <span class="c1"># Nhóm dữ liệu theo mẫu hình khuyết thiếu (missingness pattern)</span>
+    <span class="n">patterns</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="n">pattern_keys</span> <span class="o">=</span> <span class="n">patterns</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">unique_patterns</span> <span class="o">=</span> <span class="n">pattern_keys</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+    <span class="n">d2_stat</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">total_obs_vars</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">unique_patterns</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">pattern_keys</span> <span class="o">==</span> <span class="n">key</span>
+        <span class="n">sub</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">m_j</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
+        <span class="n">obs_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">key</span><span class="p">])</span>
+        <span class="n">p_j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">obs_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">p_j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">total_obs_vars</span> <span class="o">+=</span> <span class="n">p_j</span>
+        <span class="n">y_bar_j</span> <span class="o">=</span> <span class="n">sub</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">obs_mask</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">mu_j</span> <span class="o">=</span> <span class="n">mu_hat</span><span class="p">[</span><span class="n">obs_mask</span><span class="p">]</span>
+        <span class="n">sigma_j</span> <span class="o">=</span> <span class="n">sigma_hat</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ix_</span><span class="p">(</span><span class="n">obs_mask</span><span class="p">,</span> <span class="n">obs_mask</span><span class="p">)]</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">y_bar_j</span> <span class="o">-</span> <span class="n">mu_j</span>
+        <span class="n">d2_stat</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">m_j</span> <span class="o">*</span> <span class="n">diff</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">sigma_j</span><span class="p">)</span> <span class="o">@</span> <span class="n">diff</span><span class="p">)</span>
+
+    <span class="n">p_total</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dof</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_obs_vars</span> <span class="o">-</span> <span class="n">p_total</span><span class="p">)</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">d2_stat</span><span class="p">,</span> <span class="n">dof</span><span class="p">))</span> <span class="k">if</span> <span class="n">dof</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">d2_stat</span><span class="p">),</span> <span class="n">dof</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_patterns</span><span class="p">)</span>
+
+<span class="c1"># Chuẩn bị ma trận cho Little's MCAR test: 6 cột số + 3 cột phân loại có missing (mã hóa mã nguyên, giữ nguyên NaN)</span>
+<span class="n">df_mcar</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">num_cols</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">missing_cols</span><span class="p">:</span>
+    <span class="n">codes</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"category"</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">codes</span><span class="p">[</span><span class="n">codes</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">df_mcar</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">codes</span>
+
+<span class="n">little_mcar_stat</span><span class="p">,</span> <span class="n">little_mcar_df</span><span class="p">,</span> <span class="n">little_mcar_pvalue</span><span class="p">,</span> <span class="n">little_n_patterns</span> <span class="o">=</span> <span class="n">little_mcar_test</span><span class="p">(</span><span class="n">df_mcar</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== KẾT QUẢ KIỂM ĐỊNH LITTLE'S MCAR TEST ==="</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Số mẫu hình khuyết thiếu (J) : </span><span class="si">{</span><span class="n">little_n_patterns</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Thống kê d^2 (Chi-square)    : </span><span class="si">{</span><span class="n">little_mcar_stat</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Bậc tự do (df)               : </span><span class="si">{</span><span class="n">little_mcar_df</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- p-value                      : </span><span class="si">{</span><span class="n">little_mcar_pvalue</span><span class="si">:</span><span class="s2">.4e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Kết luận (alpha = 0.05)      : </span><span class="si">{</span><span class="s1">'Bác bỏ MCAR (MAR hoặc MNAR)'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">little_mcar_pvalue</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'Không đủ cơ sở bác bỏ MCAR'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># 3. Kiểm tra sự chồng chéo và phụ thuộc thống kê giữa cờ khuyết thiếu với biến quan sát</span>
+<span class="n">wc_miss</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="s2">"workclass"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+<span class="n">occ_miss</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="s2">"occupation"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+<span class="n">nc_miss</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="s2">"native.country"</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+
+<span class="n">overlap_wc_occ</span> <span class="o">=</span> <span class="nb">float</span><span class="p">((</span><span class="n">wc_miss</span> <span class="o">&amp;</span> <span class="n">occ_miss</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">wc_miss</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">extra_occ_only</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="o">~</span><span class="n">wc_miss</span> <span class="o">&amp;</span> <span class="n">occ_miss</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Tỷ lệ dòng thiếu workclass đồng thời thiếu occupation: </span><span class="si">{</span><span class="n">overlap_wc_occ</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% (chỉ thiếu riêng occupation: </span><span class="si">{</span><span class="n">extra_occ_only</span><span class="si">}</span><span class="s2"> dòng)"</span><span class="p">)</span>
+
+<span class="c1"># Kiểm định Mann-Whitney U cho age &amp; hours.per.week giữa nhóm thiếu vs không thiếu workclass/occupation</span>
+<span class="n">dep_records</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">miss_col</span> <span class="ow">in</span> <span class="n">missing_cols</span><span class="p">:</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">miss_col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">obs_num</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"age"</span><span class="p">,</span> <span class="s2">"hours.per.week"</span><span class="p">,</span> <span class="s2">"education.num"</span><span class="p">]:</span>
+        <span class="n">g_miss</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">flag</span><span class="p">,</span> <span class="n">obs_num</span><span class="p">]</span>
+        <span class="n">g_obs</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">~</span><span class="n">flag</span><span class="p">,</span> <span class="n">obs_num</span><span class="p">]</span>
+        <span class="n">u_stat</span><span class="p">,</span> <span class="n">u_pval</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">g_miss</span><span class="p">,</span> <span class="n">g_obs</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s2">"two-sided"</span><span class="p">)</span>
+        <span class="n">dep_records</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">"Missing Column"</span><span class="p">:</span> <span class="n">miss_col</span><span class="p">,</span>
+            <span class="s2">"Observed Feature"</span><span class="p">:</span> <span class="n">obs_num</span><span class="p">,</span>
+            <span class="s2">"Mean (Missing)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">g_miss</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s2">"Mean (Observed)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">g_obs</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s2">"Mann-Whitney p-value"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">u_pval</span><span class="p">),</span>
+        <span class="p">})</span>
+
+<span class="c1"># Kiểm định Chi-square giữa cờ khuyết thiếu và biến mục tiêu income</span>
+<span class="n">income_dep_records</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">miss_col</span> <span class="ow">in</span> <span class="n">missing_cols</span><span class="p">:</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df_raw</span><span class="p">[</span><span class="n">miss_col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">TARGET_COL</span><span class="p">])</span>
+    <span class="n">chi2_val</span><span class="p">,</span> <span class="n">chi2_p</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+    <span class="n">high_inc_miss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="s2">"&gt;50K"</span><span class="p">]</span> <span class="o">/</span> <span class="n">ct</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="kc">True</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">high_inc_obs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ct</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="s2">"&gt;50K"</span><span class="p">]</span> <span class="o">/</span> <span class="n">ct</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">income_dep_records</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s2">"Missing Column"</span><span class="p">:</span> <span class="n">miss_col</span><span class="p">,</span>
+        <span class="s2">"&gt;50K Rate (Missing %)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">high_inc_miss</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">"&gt;50K Rate (Observed %)"</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">high_inc_obs</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">"Chi2 p-value"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">chi2_p</span><span class="p">),</span>
+    <span class="p">})</span>
+
+<span class="n">missing_dep_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dep_records</span><span class="p">)</span>
+<span class="n">missing_income_dep_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">income_dep_records</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Kiểm định phụ thuộc giữa cờ khuyết thiếu và các biến số quan sát (Mann-Whitney U):"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">missing_dep_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Kiểm định phụ thuộc giữa cờ khuyết thiếu và nhãn mục tiêu income (Chi-square):"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">missing_income_dep_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Các cột có giá trị khuyết thiếu (3): ['workclass', 'occupation', 'native.country']
+</pre></div>
+</div>
+<img alt="_images/40ca4ec65d47914afd50dbce83d6fdedbcc9e1100edd6154847b57faf33f2ce2.png" src="_images/40ca4ec65d47914afd50dbce83d6fdedbcc9e1100edd6154847b57faf33f2ce2.png" />
+<img alt="_images/f8efa05780dc6de092d30f9b133e9d9f1122be952b635f6e4398961433e81918.png" src="_images/f8efa05780dc6de092d30f9b133e9d9f1122be952b635f6e4398961433e81918.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== KẾT QUẢ KIỂM ĐỊNH LITTLE'S MCAR TEST ===
+- Số mẫu hình khuyết thiếu (J) : 5
+- Thống kê d^2 (Chi-square)    : 1194.03
+- Bậc tự do (df)               : 29
+- p-value                      : 6.9334e-233
+- Kết luận (alpha = 0.05)      : Bác bỏ MCAR (MAR hoặc MNAR)
+
+Tỷ lệ dòng thiếu workclass đồng thời thiếu occupation: 100.00% (chỉ thiếu riêng occupation: 7 dòng)
+
+Kiểm định phụ thuộc giữa cờ khuyết thiếu và các biến số quan sát (Mann-Whitney U):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Missing Column</th>
+      <th>Observed Feature</th>
+      <th>Mean (Missing)</th>
+      <th>Mean (Observed)</th>
+      <th>Mann-Whitney p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>workclass</td>
+      <td>age</td>
+      <td>40.96</td>
+      <td>38.44</td>
+      <td>7.218817e-01</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>workclass</td>
+      <td>hours.per.week</td>
+      <td>31.92</td>
+      <td>40.95</td>
+      <td>1.102659e-185</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>workclass</td>
+      <td>education.num</td>
+      <td>9.26</td>
+      <td>10.13</td>
+      <td>3.591284e-35</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>occupation</td>
+      <td>age</td>
+      <td>40.88</td>
+      <td>38.44</td>
+      <td>5.495847e-01</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>occupation</td>
+      <td>hours.per.week</td>
+      <td>31.91</td>
+      <td>40.95</td>
+      <td>6.056682e-187</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>occupation</td>
+      <td>education.num</td>
+      <td>9.25</td>
+      <td>10.13</td>
+      <td>6.809525e-36</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>native.country</td>
+      <td>age</td>
+      <td>38.73</td>
+      <td>38.58</td>
+      <td>4.573381e-01</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>native.country</td>
+      <td>hours.per.week</td>
+      <td>41.51</td>
+      <td>40.42</td>
+      <td>3.844599e-02</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>native.country</td>
+      <td>education.num</td>
+      <td>10.60</td>
+      <td>10.07</td>
+      <td>2.703628e-08</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kiểm định phụ thuộc giữa cờ khuyết thiếu và nhãn mục tiêu income (Chi-square):
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Missing Column</th>
+      <th>&gt;50K Rate (Missing %)</th>
+      <th>&gt;50K Rate (Observed %)</th>
+      <th>Chi2 p-value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>workclass</td>
+      <td>10.40</td>
+      <td>24.90</td>
+      <td>4.862801e-45</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>occupation</td>
+      <td>10.36</td>
+      <td>24.90</td>
+      <td>1.817210e-45</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>native.country</td>
+      <td>25.04</td>
+      <td>24.06</td>
+      <td>6.175936e-01</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="bien-luan-co-che-khuyet-thieu-mcar-mar-mnar-huong-xu-ly">
+<h3>4.2. Biện luận cơ chế khuyết thiếu (MCAR / MAR / MNAR) &amp; Hướng xử lý<a class="headerlink" href="#bien-luan-co-che-khuyet-thieu-mcar-mar-mnar-huong-xu-ly" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Bác bỏ tuyệt đối giả thuyết MCAR:</strong></p>
+<ul class="simple">
+<li><p>Kiểm định <strong>Little’s MCAR test</strong> trên <span class="math notranslate nohighlight">\(J = 5\)</span> mẫu hình khuyết thiếu trả về thống kê <span class="math notranslate nohighlight">\(d^2 = 1194.03\)</span> (<span class="math notranslate nohighlight">\(\text{df} = 29\)</span>, <span class="math notranslate nohighlight">\(\text{p-value} = 6.93 \times 10^{-233} \ll 0.05\)</span>), bác bỏ hoàn toàn <span class="math notranslate nohighlight">\(H_0\)</span> (MCAR).</p></li>
+<li><p>Trên <code class="docutils literal notranslate"><span class="pre">missingno.heatmap</span></code> và <code class="docutils literal notranslate"><span class="pre">missingno.matrix</span></code>, tương quan khuyết thiếu giữa <code class="docutils literal notranslate"><span class="pre">workclass</span></code> và <code class="docutils literal notranslate"><span class="pre">occupation</span></code> đạt xấp xỉ <strong>+1.0</strong>: <strong>100.00%</strong> các dòng khuyết <code class="docutils literal notranslate"><span class="pre">workclass</span></code> (1.836 dòng) đều đồng thời khuyết <code class="docutils literal notranslate"><span class="pre">occupation</span></code> (chỉ có 7 dòng khuyết riêng <code class="docutils literal notranslate"><span class="pre">occupation</span></code>, tương ứng nhóm <code class="docutils literal notranslate"><span class="pre">Never-worked</span></code>). Đây là bằng chứng rõ ràng của khuyết thiếu có cấu trúc (<em>structured missingness</em>).</p></li>
+</ul>
+</li>
+<li><p><strong>Bằng chứng rõ rệt của cơ chế MAR và thành phần MNAR:</strong></p>
+<ul class="simple">
+<li><p><strong>Phụ thuộc mạnh vào biến quan sát (MAR):</strong> Nhóm khuyết <code class="docutils literal notranslate"><span class="pre">workclass</span></code>/<code class="docutils literal notranslate"><span class="pre">occupation</span></code> có số giờ làm việc trung bình thấp hơn rõ rệt (<strong>31.92 giờ/tuần</strong> so với <strong>40.95 giờ/tuần</strong>, Mann–Whitney <span class="math notranslate nohighlight">\(p \approx 1.10 \times 10^{-185}\)</span>), trình độ học vấn thấp hơn (<code class="docutils literal notranslate"><span class="pre">education.num</span></code> trung bình <strong>9.26</strong> vs <strong>10.13</strong>, <span class="math notranslate nohighlight">\(p \approx 3.59 \times 10^{-35}\)</span>), và tỷ lệ thu nhập <code class="docutils literal notranslate"><span class="pre">&gt;50K</span></code> chỉ đạt <strong>10.40%</strong> so với <strong>24.90%</strong> ở nhóm quan sát được (Chi-square <span class="math notranslate nohighlight">\(p \approx 4.86 \times 10^{-45}\)</span>). Đáng chú ý, kiểm định Mann–Whitney U trên <code class="docutils literal notranslate"><span class="pre">age</span></code> không có ý nghĩa (<span class="math notranslate nohighlight">\(p = 0.722\)</span>) dù trung bình lệch (40.96 vs 38.44) vì nhóm khuyết <code class="docutils literal notranslate"><span class="pre">workclass</span></code> có <strong>phân phối hai đỉnh (bimodal)</strong>: tập trung đồng thời ở sinh viên trẻ và người đã nghỉ hưu.</p></li>
+<li><p><strong>Khả năng tồn tại thành phần MNAR:</strong> Với <code class="docutils literal notranslate"><span class="pre">native.country</span></code> (1.79% khuyết thiếu), tỷ lệ <code class="docutils literal notranslate"><span class="pre">&gt;50K</span></code> hầu như không khác biệt (25.04% vs 24.06%, <span class="math notranslate nohighlight">\(p = 0.618\)</span>), nhưng trình độ học vấn cao hơn đáng kể (10.60 vs 10.07, <span class="math notranslate nohighlight">\(p = 2.70 \times 10^{-8}\)</span>); đồng thời người khảo sát có thể chủ động từ chối khai báo quốc tịch vì lý do nhạy cảm — mang đặc trưng của <strong>MNAR</strong>. Tương tự, việc không khai báo <code class="docutils literal notranslate"><span class="pre">workclass</span></code>/<code class="docutils literal notranslate"><span class="pre">occupation</span></code> ở nhóm thất nghiệp/phi chính thức cũng chứa thông tin ẩn (<em>informative missingness</em>).</p></li>
+</ul>
+</li>
+<li><p><strong>Chiến lược tiền xử lý đề xuất cho Chương 2:</strong></p>
+<ul class="simple">
+<li><p><strong>Không xóa bỏ (Listwise Deletion):</strong> Vì dữ liệu không phải MCAR, xóa ~7% dòng khuyết sẽ làm lệch phân phối mẫu và mất đi nhóm nhân khẩu học đặc thù (thu nhập thấp, giờ làm ít).</p></li>
+<li><p><strong>Đánh giá định lượng 5 chiến lược điền khuyết</strong> (Mean, Median, Mode, k-NN, MICE) trên kịch bản tạo nhân tạo thêm 10% giá trị thiếu MCAR (để tính RMSE chuẩn xác trên tập giá trị thật), kết hợp xử lý biến phân loại và giữ nguyên cấu trúc chống rò rỉ dữ liệu ở Chương 2.</p></li>
+</ul>
+</li>
+</ol>
+</section>
 </section>
 </section>
 
@@ -414,7 +1599,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chương 2: Tiền xử lý Dữ liệu Bảng &amp; Xử lý Mất cân bằng</p>
+        <p class="prev-next-title">Chương 2: Pipeline Tiền xử lý Dữ liệu Bảng &amp; Xử lý Mất cân bằng <code class="docutils literal notranslate"><span class="pre">[Nâng</span> <span class="pre">cao]</span></code></p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -434,7 +1619,27 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muc-tieu-chuong">Mục tiêu chương</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muc-tieu-phan-tich">Mục tiêu phân tích</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tai-du-lieu-va-kham-pha-cau-truc-tong-quan">1. Tải dữ liệu và Khám phá Cấu trúc Tổng quan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nguon-du-lieu-va-co-che-tai-tu-dong">1.1. Nguồn dữ liệu và cơ chế tải tự động</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nhan-xet-so-bo-ve-cau-truc-du-lieu">1.2. Nhận xét sơ bộ về cấu trúc dữ liệu</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kiem-dinh-phan-phoi-chuan-normality-testing">2. Kiểm định Phân phối Chuẩn (Normality Testing)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-so-ly-thuyet-va-cong-thuc-toan-hoc">2.1. Cơ sở lý thuyết và công thức toán học</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-ket-qua-kiem-dinh-phan-phoi-nhan-xet-phe-binh">2.2. Phân tích kết quả kiểm định phân phối &amp; Nhận xét phê bình</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-tuong-quan-da-bien-multivariate-correlation-analysis">3. Phân tích Tương quan Đa biến (Multivariate Correlation Analysis)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. Cơ sở lý thuyết và công thức toán học</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-ket-qua-tuong-quan-da-bien-de-xuat-xu-ly">3.2. Phân tích kết quả tương quan đa biến &amp; Đề xuất xử lý</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#phan-tich-gia-tri-khuyet-thieu-kiem-dinh-little-s-mcar-test">4. Phân tích Giá trị Khuyết thiếu &amp; Kiểm định Little’s MCAR Test</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-so-ly-thuyet-co-che-khuyet-thieu-mcar-mar-mnar-va-little-s-mcar-test">4.1. Cơ sở lý thuyết: Cơ chế khuyết thiếu (MCAR, MAR, MNAR) và Little’s MCAR Test</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bien-luan-co-che-khuyet-thieu-mcar-mar-mnar-huong-xu-ly">4.2. Biện luận cơ chế khuyết thiếu (MCAR / MAR / MNAR) &amp; Hướng xử lý</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
