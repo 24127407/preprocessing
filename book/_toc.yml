@@ -1,0 +1,8 @@
+# book/_toc.yml
+format: jb-book
+root: index
+chapters:
+  - file: 01_EDA_tabular
+  - file: 02_preprocessing_tabular
+  - file: 06_text_preprocessing
+  - file: report

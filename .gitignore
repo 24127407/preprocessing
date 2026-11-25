@@ -1,0 +1,25 @@
+# Data files (downloaded automatically via src/prepare_data.py)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Jupyter Book build artifacts & caches
+book/_build/
+.ipynb_checkpoints/
+
+# Python & Virtual environments
+__pycache__/
+*.pyc
+.venv/
+
+# IDE & OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local planning & assignment reference docs (not part of repo deliverables)
+Ke_Hoach_Do_An_Tien_Xu_Ly_Du_Lieu_2_Tuan.docx
+k_ho_ch_tri_n_khai_n_ti_n_x_l_d_li_u.md
+preprocessing.md

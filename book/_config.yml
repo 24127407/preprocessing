@@ -1,0 +1,22 @@
+# book/_config.yml
+title: Đồ án Tiền xử lý Dữ liệu
+author: Mã Đức Khải
+copyright: "2026"
+
+execute:
+  execute_notebooks: cache
+  timeout: 600
+
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+
+html:
+  use_issues_button: false
+  use_repository_button: true
+
+repository:
+  url: https://github.com/TheBrilliantCoder/24127407
+  path_to_book: book
+  branch: main
