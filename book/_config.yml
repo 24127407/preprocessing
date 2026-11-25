@@ -17,6 +17,6 @@ html:
   use_repository_button: true
 
 repository:
-  url: https://github.com/TheBrilliantCoder/24127407
+  url: https://github.com/24127407/preprocessing
   path_to_book: book
   branch: main
